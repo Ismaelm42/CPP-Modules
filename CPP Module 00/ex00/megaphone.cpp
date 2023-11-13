@@ -2,7 +2,6 @@
 
 void	convert_to_uppercase(std::string& str)
 {
-
 	for (int n = 0; str[n] != 0; n++)
 		str[n] = std::toupper(str[n]);
 	std::cout << str;

@@ -1,33 +1,53 @@
 #include "PhoneBook.hpp"
+#include "Contact.hpp"
 
-int PhoneBook::index = 0;
 
-std::ostream& PhoneBook::operator<<(std::ostream& out)
+PhoneBook::PhoneBook(){this->index = 0; this->flag = false;}
+
+PhoneBook::~PhoneBook(){}
+
+static void	print_contacts(PhoneBook& Phonebook)
 {
-	out << "|" << std::setw(10) << "INDEX";
-	out << "|" << std::setw(10) << "FIRST NAME";
-	out << "|" << std::setw(10) << "LAST NAME";
-	out << "|" << std::setw(10) << "NICKNAME";
-	out << "|";
-	out << std::endl;
-	out << "____________________________________________";
-	out << std::endl;
-	for(int i = 0; i < this->index; i++)
+	int	index;
+
+	std::cout << "|" << GREEN << std::setw(10) << "Index" << RESET;
+	std::cout << "|" << GREEN << std::setw(10) << "First name" << RESET;
+	std::cout << "|" << GREEN << std::setw(10) << "Last name" << RESET;
+	std::cout << "|" << GREEN << std::setw(10) << "Nickname" << RESET;
+	std::cout << "|";
+	std::cout << std::endl;
+	(Phonebook.flag == true) ? index = 8 : index = Phonebook.index;
+	for(int i = 0; i < index ; i++)
 	{
-		out << "|" << std::setw(10) << (i + 1);
-		if (this->contacts[i].first_name.length() > 10)
-			out << "|" << this->contacts[i].first_name.substr(0, 9) << ".";
-		else out << "|" << std::setw(10) << this->contacts[i].first_name;
-		if (this->contacts[i].last_name.length() > 10)
-			out << "|" << this->contacts[i].last_name.substr(0, 9) << ".";
-		else out << "|" << std::setw(10) << this->contacts[i].last_name;
-		if (this->contacts[i].nickname.length() > 10)
-			out << "|" << this->contacts[i].nickname.substr(0, 9) << ".";
-		else out << "|" << std::setw(10) << this->contacts[i].nickname;
-		out << "|" << "\n";
+		std::cout << "|" << std::setw(10) << (i + 1);
+		if (Phonebook.contacts[i].first_name.length() > 10)
+			std::cout << "|" << Phonebook.contacts[i].first_name.substr(0, 9) << ".";
+		else std::cout << "|" << std::setw(10) << Phonebook.contacts[i].first_name;
+		if (Phonebook.contacts[i].last_name.length() > 10)
+			std::cout << "|" << Phonebook.contacts[i].last_name.substr(0, 9) << ".";
+		else std::cout << "|" << std::setw(10) << Phonebook.contacts[i].last_name;
+		if (Phonebook.contacts[i].nickname.length() > 10)
+			std::cout << "|" << Phonebook.contacts[i].nickname.substr(0, 9) << ".";
+		else std::cout << "|" << std::setw(10) << Phonebook.contacts[i].nickname;
+		std::cout << "|" << "\n";
 	}
-	out << std::endl;
-	return out;
+	std::cout << std::endl;
+}
+
+static void	print_contact_info(PhoneBook& Phonebook, int index)
+{
+	index--;
+	std::cout << YELLOW << "First name: " << RESET << Phonebook.contacts[index].first_name << std::endl;
+	std::cout << YELLOW << "Last name: " << RESET << Phonebook.contacts[index].last_name << std::endl;
+	std::cout << YELLOW << "Nickname: " << RESET << Phonebook.contacts[index].nickname << std::endl;
+	std::cout << YELLOW << "Phone number: " << RESET << Phonebook.contacts[index].phone_number << std::endl;
+	std::cout << YELLOW << "Darkest secret: " << RESET << Phonebook.contacts[index].darkest_secret << std::endl;
+}
+
+void PhoneBook::add_contact()
+{
+	this->contacts[this->index].add_contact();
+	(this->index == 7) ? this->index = 0, this->flag = true : this->index++; 
 }
 
 void PhoneBook::display_contacts()
@@ -35,26 +55,21 @@ void PhoneBook::display_contacts()
 	std::string input;
 	int			index_typed;
 
-	if (this->index == 0)
-	{
-		std::cout << "Your PhoneBook is empty, please, add a new contact\n";
-		return;
-	}
-	this->operator<<(std::cout);
-	std::cout << "Type index to see more info\n";
-	getline(std::cin, input);
-	index_typed = std::atoi(input.c_str());
-	if (index_typed < 1 || index_typed > (this->index + 1))
-		std::cout << "Invalid index range\n";
+	if (this->contacts[0].first_name.empty())
+		std::cout << RED << "Your PhoneBook is empty, please, add a new contact\n" << RESET;
 	else
-		print_contact_info(*this, (index - 1));
-}
-
-void	print_contact_info(PhoneBook& phonebook, int index)
-{
-	std::cout << phonebook.contacts[index].first_name << std::endl;
-	std::cout << phonebook.contacts[index].last_name << std::endl;
-	std::cout << phonebook.contacts[index].nickname << std::endl;
-	std::cout << phonebook.contacts[index].phone_number << std::endl;
-	std::cout << phonebook.contacts[index].darkest_secret << std::endl;
+	{
+		print_contacts(*this);
+		std::cout << YELLOW << "Enter an index to view additional information\n" << RESET;
+		for (;;)
+		{
+			getline(std::cin, input);
+			index_typed = std::atoi(input.c_str());
+			if (index_typed < 1 || (index_typed > this->index && this->flag == false) || index_typed > 8)
+				std::cout << RED << "Invalid index range, please, try again\n" << RESET;
+			else
+				break ;
+		}
+		print_contact_info(*this, index_typed);
+	}
 }
