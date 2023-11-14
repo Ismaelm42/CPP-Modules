@@ -6,7 +6,7 @@ PhoneBook::PhoneBook(){this->index = 0; this->flag = false;}
 
 PhoneBook::~PhoneBook(){}
 
-static void	print_contacts(PhoneBook& Phonebook)
+void PhoneBook::_print_contacts(PhoneBook& Phonebook)
 {
 	int	index;
 
@@ -34,7 +34,7 @@ static void	print_contacts(PhoneBook& Phonebook)
 	std::cout << std::endl;
 }
 
-static void	print_contact_info(PhoneBook& Phonebook, int index)
+void PhoneBook::_print_contact_info(PhoneBook& Phonebook, int index)
 {
 	index--;
 	std::cout << YELLOW << "First name: " << RESET << Phonebook.contacts[index].first_name << std::endl;
@@ -59,7 +59,7 @@ void PhoneBook::display_contacts()
 		std::cout << RED << "Your PhoneBook is empty, please, add a new contact\n" << RESET;
 	else
 	{
-		print_contacts(*this);
+		_print_contacts(*this);
 		std::cout << YELLOW << "Enter an index to view additional information\n" << RESET;
 		for (;;)
 		{
@@ -70,6 +70,6 @@ void PhoneBook::display_contacts()
 			else
 				break ;
 		}
-		print_contact_info(*this, index_typed);
+		_print_contact_info(*this, index_typed);
 	}
 }

@@ -15,6 +15,8 @@ class Contact
 		std::string phone_number;
 		std::string darkest_secret;
 		void add_contact();
+	private:
+		void _get_contact(std::string& string, std::string prompt);
 };
 
 #endif

@@ -4,7 +4,7 @@ Contact::Contact(){};
 
 Contact::~Contact(){};
 
-static void	get_contact(std::string& string, std::string prompt)
+void	Contact::_get_contact(std::string& string, std::string prompt)
 {
 	string.clear();
 	for (;string.empty();)
@@ -16,9 +16,9 @@ static void	get_contact(std::string& string, std::string prompt)
 
 void		Contact::add_contact()
 {
-	get_contact(this->first_name, "Enter first name: ");
-	get_contact(this->last_name, "Enter last name: ");
-	get_contact(this->nickname, "Enter nickname: ");
-	get_contact(this->phone_number, "Enter phone number: ");
-	get_contact(this->darkest_secret, "Enter darkest secret: ");
+	_get_contact(this->first_name, "Enter first name: ");
+	_get_contact(this->last_name, "Enter last name: ");
+	_get_contact(this->nickname, "Enter nickname: ");
+	_get_contact(this->phone_number, "Enter phone number: ");
+	_get_contact(this->darkest_secret, "Enter darkest secret: ");
 }

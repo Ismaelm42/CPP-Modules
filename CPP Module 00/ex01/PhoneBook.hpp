@@ -12,13 +12,18 @@
 class PhoneBook
 {
 	public:
-	PhoneBook();
-	~PhoneBook();
-	int		index;
-	bool	flag;
-	Contact	contacts[8];
-	void	add_contact();
-	void	display_contacts();
+		PhoneBook();
+		~PhoneBook();
+		int		index;
+		bool	flag;
+		Contact	contacts[8];
+		void	add_contact();
+		void	display_contacts();
+
+	private:
+		static void	_print_contacts(PhoneBook& Phonebook);
+		static void	_print_contact_info(PhoneBook& Phonebook, int index);
+
 };
 
 #endif
