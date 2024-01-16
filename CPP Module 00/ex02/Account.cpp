@@ -26,14 +26,17 @@ int	Account::getNbAccounts(void)
 {
 	return _nbAccounts;
 }
+
 int	Account::getTotalAmount(void)
 {
 	return _totalAmount;
 }
+
 int	Account::getNbDeposits(void)
 {
 	return _totalNbDeposits;
 }
+
 int	Account::getNbWithdrawals(void)
 {
 	return _totalNbWithdrawals;
@@ -65,6 +68,7 @@ void	Account::makeDeposit(int deposit)
 	_totalNbDeposits += _nbDeposits;
 	std::cout << "nb_deposits:" << _nbDeposits << std::endl;
 }
+
 bool	Account::makeWithdrawal(int withdrawal)
 {
 	if (_accountIndex == 0)
