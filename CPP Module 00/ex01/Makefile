@@ -4,7 +4,9 @@ SRC =	main.cpp		\
 		Contact.cpp		\
 		PhoneBook.cpp	\
 
-OBJT = $(SRC:.cpp=.o)
+OBJT_DIR = .objt/
+
+OBJT = $(addprefix $(OBJT_DIR), $(patsubst %.cpp, %.o, $(SRC)))
 
 C++ = c++
 
@@ -19,10 +21,14 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): $(OBJT)
-	${C++} $(CFLAGS) $(C++FLAG) $(SRC) -o ${NAME}
+	${C++} $(CFLAGS) $(C++FLAG) $(OBJT) -o ${NAME}
+
+$(OBJT_DIR)%.o: %.cpp
+	mkdir -p $(@D)
+	$(C++) $(CFLAGS) $(C++FLAG) -c $< -o $@
 
 clean:
-	$(RM) $(OBJT)
+	$(RM) -r $(OBJT_DIR)
 
 fclean: clean
 	$(RM) $(NAME)

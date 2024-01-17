@@ -1,4 +1,4 @@
-#include "Zombie.h"
+#include "Zombie.hpp"
 #include <iostream>
 
 int	main()
@@ -19,4 +19,5 @@ int	main()
 	Zombie *heap_zomb = newZombie(string);
 	heap_zomb->announce();
 	delete(heap_zomb);
+	return 0;
 }

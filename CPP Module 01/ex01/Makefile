@@ -1,7 +1,8 @@
-NAME =	Account
+NAME =	Zombie
 
-SRC =	Account.cpp		\
-		tests.cpp		\
+SRC =	main.cpp			\
+		Zombie.cpp			\
+		zombieHorde.cpp		\
 
 OBJT_DIR = .objt/
 
