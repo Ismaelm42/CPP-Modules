@@ -1,7 +1,7 @@
 NAME =	sed_for_losers
 
 SRC =	main.cpp	\
-		File.cpp	\
+		Sed.cpp	\
 
 OBJT_DIR = .objt/
 
