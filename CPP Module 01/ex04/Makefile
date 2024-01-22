@@ -1,9 +1,7 @@
-NAME =	Violence
+NAME =	a.out
 
 SRC =	main.cpp	\
-		HumanA.cpp	\
-		HumanB.cpp	\
-		Weapon.cpp	\
+		File.cpp	\
 
 OBJT_DIR = .objt/
 
