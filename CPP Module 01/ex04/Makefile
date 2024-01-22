@@ -1,4 +1,4 @@
-NAME =	a.out
+NAME =	sed_for_losers
 
 SRC =	main.cpp	\
 		File.cpp	\

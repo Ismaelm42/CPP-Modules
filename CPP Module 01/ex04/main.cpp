@@ -6,7 +6,7 @@
 
 int	main()
 {
-	File	file;
+	Sed	file;
 
 	if (file.check_files() == false)
 		return -1;

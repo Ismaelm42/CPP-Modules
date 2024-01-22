@@ -1,6 +1,6 @@
 #include "File.hpp"
 
-File::File()
+Sed::Sed()
 {
 	std::cout << "Please enter the filename: ";
 	getline(std::cin, _filename);
@@ -10,7 +10,7 @@ File::File()
 	getline(std::cin, this->_s2);
 }
 
-bool	File::_open_infile()
+bool	Sed::_open_infile()
 {
 	_infile.open(_filename.c_str(), std::fstream::in);
 	if (_infile.fail() == true)
@@ -18,7 +18,7 @@ bool	File::_open_infile()
 	return true;
 }
 
-bool	File::_create_outfile()
+bool	Sed::_create_outfile()
 {
 	_outfile.open((_filename + ".replace").c_str(), std::fstream::out);
 	if (_outfile.fail() == true)
@@ -26,7 +26,7 @@ bool	File::_create_outfile()
 	return true;
 }
 
-bool	File::check_files()
+bool	Sed::check_files()
 {
 	if (_open_infile() == false)
 	{
@@ -46,7 +46,7 @@ bool	File::check_files()
 	return true;
 }
 
-void	File::replace_file()
+void	Sed::replace_file()
 {
 	std::string	buffer;
 
@@ -72,7 +72,7 @@ void	File::replace_file()
 	}
 }
 
-File::~File()
+Sed::~Sed()
 {
 	if (this->_infile.is_open() == true)
 		this->_infile.close();

@@ -5,11 +5,11 @@
 #include <string>
 #include <fstream>
 
-class File
+class Sed
 {
 	public:
-		File();
-		~File();
+		Sed();
+		~Sed();
 		bool	check_files();
 		void	replace_file();
 
