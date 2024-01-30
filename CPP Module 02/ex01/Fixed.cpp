@@ -30,23 +30,13 @@ const Fixed& Fixed::operator=(const Fixed& name)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &name)
-		this->_fixed_point = name.getRawBits();
+		this->_fixed_point = name._fixed_point;
 	return *this;
-}
-
-void	Fixed::setRawBits(int const raw)
-{
-	this->_fixed_point = raw;
-}
-
-int		Fixed::getRawBits(void) const
-{
-	return this->_fixed_point;
 }
 
 int		Fixed::toInt(void) const
 {
-	   return (_fixed_point >> _fractional_bits);
+	return (_fixed_point >> _fractional_bits);
 }
 
 float	Fixed::toFloat(void) const
