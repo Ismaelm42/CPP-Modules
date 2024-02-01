@@ -1,4 +1,4 @@
-NAME =	a.out
+NAME =	bsp
 
 SRC =	main.cpp	\
 		Fixed.cpp	\
