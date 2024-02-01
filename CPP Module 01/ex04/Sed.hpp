@@ -1,5 +1,5 @@
-#ifndef FILE_HPP
-#define FILE_HPP
+#ifndef SED_HPP
+#define SED_HPP
 #include <ios>
 #include <iostream>
 #include <string>
