@@ -3,7 +3,6 @@
 
 int main()
 {
-
 	ClapTrap def, c_trap_1("Clappy"), c_trap_2("Trappy");
 
 	c_trap_1.attack("Trappy");
