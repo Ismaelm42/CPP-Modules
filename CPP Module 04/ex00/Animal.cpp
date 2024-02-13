@@ -32,7 +32,7 @@ Animal::~Animal()
 
 void	Animal::makeSound()const
 {
-	return;
+	
 }
 
 std::string Animal::getType() const

@@ -16,12 +16,7 @@ int main()
 	delete pussycat;
 	std::cout << std::endl << std::endl << std::endl;
 
-	const Animal* animals[4];
-
-	animals[0] = new Dog();
-	animals[1] = new Dog();
-	animals[2] = new Cat();
-	animals[3] = new Cat();
+	const Animal* animals[4] = {new Dog(), new Dog(), new Cat(), new Cat()};
 
 	std::cout << std::endl << std::endl << std::endl;
 
