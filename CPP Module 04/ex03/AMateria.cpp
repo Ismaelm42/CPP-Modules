@@ -19,9 +19,9 @@ AMateria::AMateria(const AMateria& other)
 
 AMateria& AMateria::operator=(const AMateria& other)
 {
-	if (this != &other)
-		this->type = other.type;
-	return *this;
+	delete this;
+	AMateria *new_materia = other.clone();
+	return *new_materia;
 }
 
 AMateria::~AMateria()

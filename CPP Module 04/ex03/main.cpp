@@ -7,30 +7,35 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
-// int main(void)
-// {
-// 	IMateriaSource* src = new MateriaSource();
+int main(void)
+{
+	IMateriaSource* src = new MateriaSource();
 
-// 	src->learnMateria(new Ice());
-// 	src->learnMateria(new Cure());
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
 
-// 	ICharacter*	me = new Character("me");
-// 	AMateria*	tmp;
+	ICharacter*	me = new Character("me");
+	AMateria*	tmp;
 
-// 	tmp = src->createMateria("ice");
-// 	me->equip(tmp);
-// 	tmp = src->createMateria("cure");
-// 	me->equip(tmp);
-// 	tmp = src->createMateria("unknown");
-// 	ICharacter* bob = new Character("bob");
-// 	me->use(0, *bob);
-// 	me->use(1, *bob);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("unknown");
+	ICharacter* bob = new Character("bob");
 
-// 	delete bob;
-// 	delete me;
-// 	delete src;
-// 	return 0;
-// }
+	tmp = new Cure();
+	std::cout << tmp->getType() << std::endl;
+
+	me->use(0, *bob);
+	me->use(1, *bob);
+
+	delete tmp;
+	delete bob;
+	delete me;
+	delete src;
+	return 0;
+}
 
 // int main(void)
 // {
@@ -67,30 +72,30 @@
 // 	return 0;
 // }
 
-int main()
-{
-	IMateriaSource	*materiaSource = new MateriaSource();
-	ICharacter		*character1 = new Character("character1");
-	ICharacter		*character2 = new Character("character2");
+// int main()
+// {
+// 	IMateriaSource	*materiaSource = new MateriaSource();
+// 	ICharacter		*character1 = new Character("character1");
+// 	ICharacter		*character2 = new Character("character2");
 	
-	materiaSource->learnMateria(new Ice());
-	materiaSource->learnMateria(new Cure());
-	materiaSource->learnMateria(new Cure());
-	materiaSource->learnMateria(new Cure());
-	materiaSource->learnMateria(new Cure());
+// 	materiaSource->learnMateria(new Ice());
+// 	materiaSource->learnMateria(new Cure());
+// 	materiaSource->learnMateria(new Cure());
+// 	materiaSource->learnMateria(new Cure());
+// 	materiaSource->learnMateria(new Cure());
 
-	character1->equip(materiaSource->createMateria("cure"));
-	character1->equip(materiaSource->createMateria("cure"));
-	character1->equip(materiaSource->createMateria("ice"));
-	character1->equip(materiaSource->createMateria("ice"));
-	character1->equip(materiaSource->createMateria("cure"));
+// 	character1->equip(materiaSource->createMateria("cure"));
+// 	character1->equip(materiaSource->createMateria("cure"));
+// 	character1->equip(materiaSource->createMateria("ice"));
+// 	character1->equip(materiaSource->createMateria("ice"));
+// 	character1->equip(materiaSource->createMateria("cure"));
 
-	character1->use(0, *character2);
-	character1->use(2, *character2);
+// 	character1->use(0, *character2);
+// 	character1->use(2, *character2);
 	
-	delete materiaSource;
-	delete character1;
-	delete character2;
-	return 0;
-}
+// 	delete materiaSource;
+// 	delete character1;
+// 	delete character2;
+// 	return 0;
+// }
 
