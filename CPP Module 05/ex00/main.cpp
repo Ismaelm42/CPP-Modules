@@ -4,17 +4,18 @@
 
 int main()
 {
-	Bureaucrat newBureaucrat("Alfred", 155);
+	int range = 155;
+	Bureaucrat newBureaucrat("Alfred", range);
 
 	std::cout << newBureaucrat;
-	int rand_num = 0;
-	for (int i = 0; i < 155; i++)
+	int rand_num = range;
+	srand(time(NULL));
+	for (int i = 0; i < range; i++)
 	{
-		if (i == rand_num)
+		if (range - i == rand_num)
 		{
-			std::cout << "nº " << i << " " << newBureaucrat;
-			rand_num = rand();
-			std::cout << "rand num = " << rand_num << std::endl;
+			rand_num = rand() % 20 + (newBureaucrat.getGrade() - 20);
+			std::cout << newBureaucrat;
 		}
 		newBureaucrat.increment();
 	}

@@ -17,7 +17,7 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade)
 	}
 	catch(std::exception& e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << e.what() << this->_grade << std::endl;
 	}
 }
 Bureaucrat::Bureaucrat(const Bureaucrat& other)
@@ -61,7 +61,7 @@ void	Bureaucrat::increment()
 	}
 	catch(std::exception& e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << e.what() << this->_grade << std::endl;
 	}
 }
 
@@ -77,7 +77,7 @@ void	Bureaucrat::decrement()
 	}
 	catch(std::exception& e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << e.what() << this->_grade << std::endl;
 	}
 }
 
@@ -85,12 +85,12 @@ void	Bureaucrat::decrement()
 
 const char *Bureaucrat::GradeTooHighException::what()const throw()
 {
-	return "Error: Grade too high";
+	return "Error: Grade too high: ";
 }
 
 const char *Bureaucrat::GradeTooLowException::what()const throw()
 {
-	return "Error: Grade too low";
+	return "Error: Grade too low: ";
 }
 
 
