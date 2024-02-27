@@ -47,7 +47,7 @@ int Bureaucrat::getGrade()const
 	return this->_grade;
 }
 
-void	Bureaucrat::increment()
+void Bureaucrat::increment()
 {
 	try
 	{
@@ -63,7 +63,7 @@ void	Bureaucrat::increment()
 	}
 }
 
-void	Bureaucrat::decrement()
+void Bureaucrat::decrement()
 {
 	try
 	{
@@ -79,7 +79,17 @@ void	Bureaucrat::decrement()
 	}
 }
 
-
+void Bureaucrat::signForm(Form& rhs)
+{
+	if (rhs.beSigned(*this) == true)
+		std::cout << "bureaucrat " << this->getName() << " signed form " << rhs.getName() << std::endl;
+	else
+	{
+		std::cout << "bureaucrat " << this->getName() << " couldn't sign form " << rhs.getName()
+		<< " because bureaucrat grade " << this->getGrade() << " is too low for form grade "
+		<< rhs.getSigningGrade() << std::endl;
+	}
+}
 
 const char *Bureaucrat::GradeTooHighException::what()const throw()
 {

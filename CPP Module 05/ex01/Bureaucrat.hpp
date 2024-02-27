@@ -1,7 +1,10 @@
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
+#include "Form.hpp"
 #include <iostream>
 #include <exception>
+
+class Form;
 
 class Bureaucrat
 {
@@ -20,6 +23,8 @@ class Bureaucrat
 		void increment();
 		void decrement();
 
+		void signForm(Form& rhs);
+
 		class GradeTooHighException: public std::exception
 		{
 			public:
@@ -29,7 +34,8 @@ class Bureaucrat
 		{
 			public:
 				const char* what()const throw();
-		};	
+		};
+		
 };
 
 std::ostream& operator<<(std::ostream& stream, Bureaucrat& foo);
