@@ -77,7 +77,7 @@ void	Bureaucrat::decrement()
 	}
 }
 
-void Bureaucrat::signForm(Form& rhs)
+void Bureaucrat::signForm(AForm& rhs)
 {
 	try
 	{
@@ -88,6 +88,23 @@ void Bureaucrat::signForm(Form& rhs)
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
+	}
+}
+
+void Bureaucrat::executeForm(const AForm& form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << this->getName() << " executed " << form.getName() << std::endl;
+	}	
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what();
+		if (this->getGrade() > form.getExecutionGrade() && form.getSignature() == true)
+			std::cerr << this->getGrade();
+		std::cerr << std::endl;
+		std::cerr << this->getName() << " didn't execute " << form.getName() << std::endl;
 	}
 }
 

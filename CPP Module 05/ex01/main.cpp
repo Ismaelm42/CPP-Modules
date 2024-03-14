@@ -5,9 +5,11 @@
 
 int main()
 {
-	Form paper("Paper", 35, 0);
-	Bureaucrat Alfred("Alfred", 47);
+	Form paper("Paper", 34, 158);
+	Bureaucrat Alfred("Alfred", 34);
 
+	std::cout << paper << std::endl;
 	Alfred.signForm(paper);
+	std::cout << paper << std::endl;
 	return 0;
 }

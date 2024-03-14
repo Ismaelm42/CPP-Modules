@@ -5,6 +5,7 @@ Bureaucrat::Bureaucrat()
 {
 
 }
+
 Bureaucrat::Bureaucrat(const std::string& name, int grade)
 :_name(name), _grade(grade)
 {
@@ -17,14 +18,16 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade)
 	}
 	catch(std::exception& e)
 	{
-		std::cerr << e.what() << this->_grade << std::endl;
+		std::cerr << e.what() << grade << std::endl;
 	}
 }
+
 Bureaucrat::Bureaucrat(const Bureaucrat& rhs)
 :_name(rhs._name), _grade(rhs._grade)
 {
 
 }
+
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& rhs)
 {
 	if (this != &rhs)
@@ -36,7 +39,6 @@ Bureaucrat::~Bureaucrat()
 {
 
 }
-
 
 const std::string Bureaucrat::getName()const
 {
@@ -51,15 +53,13 @@ void	Bureaucrat::increment()
 {
 	try
 	{
-		this->_grade--;
-		if (this->_grade < 1)
+		if (this->_grade <= 1)
 			throw Bureaucrat::GradeTooHighException();
-		if (this->_grade > 150)
-			throw Bureaucrat::GradeTooLowException();
+		this->_grade--;
 	}
 	catch(std::exception& e)
 	{
-		std::cerr << e.what() << this->_grade << std::endl;
+		std::cerr << e.what() << this->getGrade() << std::endl;
 	}
 }
 
@@ -67,19 +67,15 @@ void	Bureaucrat::decrement()
 {
 	try
 	{
-		this->_grade++;
-		if (this->_grade < 1)
-			throw Bureaucrat::GradeTooHighException();
-		if (this->_grade > 150)
+		if (this->_grade >= 150)
 			throw Bureaucrat::GradeTooLowException();
+		this->_grade++;
 	}
 	catch(std::exception& e)
 	{
-		std::cerr << e.what() << this->_grade << std::endl;
+		std::cerr << e.what() << this->getGrade() << std::endl;
 	}
 }
-
-
 
 const char *Bureaucrat::GradeTooHighException::what()const throw()
 {
@@ -90,7 +86,6 @@ const char *Bureaucrat::GradeTooLowException::what()const throw()
 {
 	return "Error: Grade too low: ";
 }
-
 
 std::ostream& operator<<(std::ostream& stream, Bureaucrat& foo)
 {

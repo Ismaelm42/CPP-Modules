@@ -7,7 +7,6 @@ int main()
 	int range = 155;
 	Bureaucrat newBureaucrat("Alfred", range);
 
-	std::cout << newBureaucrat;
 	int rand_num = range;
 	srand(time(NULL));
 	for (int i = 0; i < range; i++)
@@ -19,5 +18,6 @@ int main()
 		}
 		newBureaucrat.increment();
 	}
+	std::cout << newBureaucrat;
 	return 0;
 }
