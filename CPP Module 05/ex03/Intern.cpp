@@ -11,6 +11,12 @@ Intern::Intern(const std::string& form_name, const std::string& target)
 
 }
 
+Intern::Intern(const Intern& rhs)
+:_form_name(rhs._form_name), _target(rhs._target)
+{
+
+}
+
 Intern& Intern::operator=(const Intern& rhs)
 {
 	if (this != &rhs)

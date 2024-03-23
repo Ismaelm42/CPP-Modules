@@ -1,7 +1,6 @@
 NAME =	base
 
 SRC =	main.cpp					\
-		Base.cpp					\
 
 OBJT_DIR = .objt/
 

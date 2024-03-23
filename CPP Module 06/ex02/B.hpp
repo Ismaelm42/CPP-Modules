@@ -5,9 +5,7 @@
 
 class B: public Base
 {
-	public:
-		B(){};
-		~B(){};
+
 };
 
 #endif

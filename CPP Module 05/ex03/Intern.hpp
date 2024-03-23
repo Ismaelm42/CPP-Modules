@@ -14,6 +14,7 @@ class Intern
 	public:
 		Intern();
 		Intern(const std::string& form_name, const std::string& target);
+		Intern(const Intern& rhs);
 		Intern& operator=(const Intern& rhs);
 		~Intern();
 
