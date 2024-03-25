@@ -1,7 +1,6 @@
 #!/bin/bash
 
 i=1
-
 while [ $i -le $# ]; do
     # Variables
     name=${!i}
