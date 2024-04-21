@@ -5,6 +5,7 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <ctime>
 #include <cstdlib>
 #include <stdlib.h>
 #include <exception>
@@ -24,9 +25,11 @@ class BitcoinExchange
 		BitcoinExchange& operator=(const BitcoinExchange& rhs);
 		~BitcoinExchange();
 
-		std::string check_data(std::string& line, int *date, float& value);
-		void get_data_line(std::string& line, std::map<std::string, std::string>& container, int& key);
-		void read_data(std::map<std::string, std::string>& container, std::map<std::string, std::string>::iterator& it, std::string& last_line, std::string& line);
+		bool check_header(bool output, std::ifstream& file);
+		bool check_format(std::string& line);
+		std::string check_date_and_value(std::string& line);
+		void get_data_line(std::string& line, std::map<std::string, std::string>& container);
+		void read_data(std::map<std::string, std::string>& container);
 		void output_data(std::map<std::string, std::string>& container);
 		void get_data();
 };
