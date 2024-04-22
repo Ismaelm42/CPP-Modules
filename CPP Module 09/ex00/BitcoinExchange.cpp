@@ -31,6 +31,8 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& rhs)
 		_input.open(_input_name.c_str());
 		if (_data.fail() || _input.fail())
 			throw "Error: Could not open the file";
+		_container = rhs._container;
+		_it = rhs._it;
 	}
 	return *this;
 }
@@ -111,17 +113,17 @@ std::string BitcoinExchange::check_date_and_value(std::string& line)
 }
 
 
-void BitcoinExchange::get_data_line(std::string& line, std::map<std::string, std::string>& container)
+void BitcoinExchange::get_data_line(std::string& line)
 {
 	if (line.empty())
-		container.insert(std::pair<std::string, std::string>("", ""));
+		_container.insert(std::pair<std::string, std::string>("", ""));
 	else if (check_format(line) == false)
-		container.insert(std::pair<std::string, std::string>(line, "Error: bad input"));
+		_container.insert(std::pair<std::string, std::string>(line, "Error: bad input"));
 	else
-		container.insert(std::pair<std::string, std::string>(line, check_date_and_value(line)));
+		_container.insert(std::pair<std::string, std::string>(line, check_date_and_value(line)));
 }
 
-void BitcoinExchange::read_data(std::map<std::string, std::string>& container)
+void BitcoinExchange::read_data()
 {
 	std::stringstream ss;
 	std::string last_line;
@@ -130,26 +132,25 @@ void BitcoinExchange::read_data(std::map<std::string, std::string>& container)
 
 	check_header(false, _data);
 	getline(_data, line);
-	for (std::map<std::string, std::string>::iterator it = container.begin(); it != container.end(); it++)
+	for (_it = _container.begin(); _it != _container.end(); _it++)
 	{
-		if (it->first == "" || it->second.find("Error") != std::string::npos)
+		if (_it->first == "" || _it->second.find("Error") != std::string::npos)
 			continue ;
-		while (line.substr(0, 10) <= it->first.substr(0, 10) && !eof)
+		while (line.substr(0, 10) <= _it->first.substr(0, 10) && !eof)
 		{
 			if (line != "")
 				last_line = line;
 			if (!getline(_data, line))
 				eof = true;
 		}
-		ss << std::atof(it->second.c_str()) * std::atof(last_line.substr(11, last_line.length()).c_str());
-		it->second = ss.str();
+		ss << std::atof(_it->second.c_str()) * std::atof(last_line.substr(11, last_line.length()).c_str());
+		_it->second = ss.str();
 		ss.str("");
 	}
 }
 
-void BitcoinExchange::output_data(std::map<std::string, std::string>& container)
+void BitcoinExchange::output_data()
 {
-	std::map<std::string, std::string>::iterator it;
 	std::string line;
 
 	_input.clear();
@@ -157,30 +158,28 @@ void BitcoinExchange::output_data(std::map<std::string, std::string>& container)
 	check_header(true, _input);
 	while (getline(_input, line))
 	{
-		for (it = container.begin(); line != it->first; it++)
-			if (it == container.end())
-				it = container.begin();
-		if (it->first == "")
+		for (_it = _container.begin(); line != _it->first; _it++)
+			if (_it == _container.end())
+				_it = _container.begin();
+		if (_it->first == "")
 			std::cout << std::endl;
-		else if (it->second.find("Error: bad input") != std::string::npos)
-			std::cout << "\033[0;31m" << it->second << " => " << it->first << "\033[0m" << std::endl;
-		else if (it->second.find("Error") != std::string::npos)
-			std::cout << "\033[0;31m" << it->second << "\033[0m" << std::endl;
+		else if (_it->second.find("Error: bad input") != std::string::npos)
+			std::cout << "\033[0;31m" << _it->second << " => " << _it->first << "\033[0m" << std::endl;
+		else if (_it->second.find("Error") != std::string::npos)
+			std::cout << "\033[0;31m" << _it->second << "\033[0m" << std::endl;
 		else
-			std::cout << it->first.substr(0, 10) << " => " << it->first.substr(13, it->first.length()) << " = " << it->second << std::endl;
+			std::cout << _it->first.substr(0, 10) << " => " << _it->first.substr(13, _it->first.length()) << " = " << _it->second << std::endl;
 	}
 }
 
 void BitcoinExchange::get_data()
 {
-	std::map<std::string, std::string> container;
-	std::map<std::string, std::string>::iterator it;
 	std::string line;
 
 	if (check_header(false, _input) == false)
 		return ;
 	while (getline(_input, line))
-			get_data_line(line, container);	
-	read_data(container);
-	output_data(container);
+			get_data_line(line);	
+	read_data();
+	output_data();
 }

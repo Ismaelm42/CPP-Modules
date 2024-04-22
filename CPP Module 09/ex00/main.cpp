@@ -15,9 +15,10 @@ int main(int argc, char **argv)
 		BitcoinExchange btn(argv[1]);
 		btn.get_data();
 	}
-	catch(const char *&e)
+	catch(const char * &e)
 	{
 		std::cerr << e << std::endl;
+		return -1;
 	}
 	return 0;
 }
