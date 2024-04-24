@@ -1,7 +1,7 @@
-NAME =	RPN
+NAME =	PmergeMe
 
-SRC =	main.cpp	\
-		RPN.cpp		\
+SRC =	main.cpp		\
+		PmergeMe.cpp	\
 
 OBJT_DIR = .objt/
 
